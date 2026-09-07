@@ -8,10 +8,36 @@
       "is_spawnable": false,
       "spawn_category": "misc"
     },
+    "component_groups": {
+      "freight:moving_chunk_loader": {
+        "minecraft:tick_world": {
+          "radius": 2,
+          "never_despawn": true
+        }
+      }
+    },
     "components": {
-      "minecraft:tick_world": {
-        "radius": 2,
-        "never_despawn": true
+      "minecraft:environment_sensor": {
+        "triggers": [
+          {
+            "filters": {
+              "all_of": [
+                { "test": "is_moving", "subject": "self", "value": true },
+                { "test": "has_component", "subject": "self", "operator": "!=", "value": "minecraft:tick_world" }
+              ]
+            },
+            "event": "freight:start_chunk_loading"
+          },
+          {
+            "filters": {
+              "all_of": [
+                { "test": "is_moving", "subject": "self", "value": false },
+                { "test": "has_component", "subject": "self", "value": "minecraft:tick_world" }
+              ]
+            },
+            "event": "freight:stop_chunk_loading"
+          }
+        ]
       },
       "minecraft:collision_box": {
         "height": 0.7,
@@ -62,6 +88,17 @@
         "family": ["minecart", "inanimate"]
       }
     },
-    "events": null
+    "events": {
+      "freight:start_chunk_loading": {
+        "add": {
+          "component_groups": ["freight:moving_chunk_loader"]
+        }
+      },
+      "freight:stop_chunk_loading": {
+        "remove": {
+          "component_groups": ["freight:moving_chunk_loader"]
+        }
+      }
+    }
   }
 }

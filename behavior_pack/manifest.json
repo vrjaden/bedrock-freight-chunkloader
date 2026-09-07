@@ -4,14 +4,14 @@
     "name": "Freight Chunk Loader",
     "description": "Keeps chest minecarts active during long-distance freight transport.",
     "uuid": "5c12ecca-85e1-475e-8189-cf25877aa79e",
-    "version": [1, 0, 0],
+    "version": [1, 0, 1],
     "min_engine_version": [1, 26, 0]
   },
   "modules": [
     {
       "type": "data",
       "uuid": "d94adaab-7044-494c-b49e-b0ed97ae177b",
-      "version": [1, 0, 0]
+      "version": [1, 0, 1]
     }
   ]
 }
